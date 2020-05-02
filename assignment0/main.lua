@@ -259,6 +259,7 @@ function love.update(dt)
     --CPU_MODE
     if CPU_MODE then
         player2.dy = ball.dy * math.random(0.8, 1.0)
+
     end
 
     -- update our ball based on its DX and DY only if we're in play state;
