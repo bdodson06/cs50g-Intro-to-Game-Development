@@ -22,12 +22,15 @@ function PlayState:init()
     self.pipePairs = {}
     self.timer = 0
     self.score = 0
+    self.pause = false
 
     -- initialize our last recorded Y value for a gap placement to base other gaps off of
     self.lastY = -PIPE_HEIGHT + math.random(80) + 20
 end
 
 function PlayState:update(dt)
+    --run play state as normal when not paused
+    if self.pause == false then
     -- update timer for pipe spawning
     self.timer = self.timer + dt
 
@@ -101,6 +104,27 @@ function PlayState:update(dt)
     end
 end
 
+    --if 'p' key is pressed either pause or play depending on the current state.
+    if love.keyboard.wasPressed('p') then    --if 'P' is pressed do one of the following
+        
+        if self.pause == false then          -- if the game is currently not paused
+            self.pause = true                -- set pause flag to true 
+            scrolling = false                -- stop scrolling
+            sounds['music']:pause()          --pause music
+    
+
+        else 
+            self.pause = false              --set pause flag to false
+            scrolling = true                --resume scrolling
+            sounds['music']:play()          --resume music
+        end 
+
+    sounds['pause']:play()                  --play pause sound effect when 'p' is pressed
+    end
+    
+end
+
+
 function PlayState:render()
     for k, pair in pairs(self.pipePairs) do
         pair:render()
@@ -110,13 +134,18 @@ function PlayState:render()
     love.graphics.print('Score: ' .. tostring(self.score), 8, 8)
 
     self.bird:render()
+
+    if self.pause == true then
+        love.graphics.draw(pause, 183, 50)      --if paused draw the pause icon
+    end
 end
 
 --[[
     Called when this state is transitioned to from another state.
 ]]
 function PlayState:enter()
-    -- if we're coming from death, restart scrolling
+    -- if we're coming from pause state, render last position of bird and pipes
+    -- else reset scrolling
     scrolling = true
 end
 

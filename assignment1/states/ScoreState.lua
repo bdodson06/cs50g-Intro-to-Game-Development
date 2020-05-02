@@ -30,12 +30,12 @@ function ScoreState:render()
     if self.score >= 3 and self.score < 5 then
         love.graphics.setFont(flappyFont)
         love.graphics.printf('Congratulations! You Got Bronze!',0, 64, VIRTUAL_WIDTH, 'center')
-        love.graphics.draw(trophies['bronze'], 238, 130)
+        love.graphics.draw(trophies['bronze'], 230, 120)
     
     elseif self.score > 4 and self.score < 10 then
         love.graphics.setFont(flappyFont)
         love.graphics.printf('Congratulations! You Got Silver!', 0, 64, VIRTUAL_WIDTH, 'center')
-        love.graphics.draw(trophies['silver'], 238, 120)
+        love.graphics.draw(trophies['silver'], 235, 120)
     
     elseif self.score >= 10 then
         love.graphics.setFont(flappyFont)

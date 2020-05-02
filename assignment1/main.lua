@@ -38,6 +38,7 @@ require 'states/CountdownState'
 require 'states/PlayState'
 require 'states/ScoreState'
 require 'states/TitleScreenState'
+--require 'states/PauseState'
 
 require 'Bird'
 require 'Pipe'
@@ -77,13 +78,15 @@ function love.load()
     mediumFont = love.graphics.newFont('flappy.ttf', 14)
     flappyFont = love.graphics.newFont('flappy.ttf', 28)
     hugeFont = love.graphics.newFont('flappy.ttf', 56)
-    love.graphics.setFont(flappyFont)
+
+    --initialize our pause icon
+    pause = love.graphics.newImage('pause_icon.png')
 
     --initialize our table of trophies
     trophies = {
-        ['bronze'] = love.graphics.newImage('bronze trophy.jpg'),
-        ['silver'] = love.graphics.newImage('silver trophy.jpg'),
-        ['gold'] = love.graphics.newImage('gold trophy.jpg')
+        ['bronze'] = love.graphics.newImage('bronze trophy.png'),
+        ['silver'] = love.graphics.newImage('silver trophy.png'),
+        ['gold'] = love.graphics.newImage('gold trophy.png')
     }
 
     -- initialize our table of sounds
@@ -92,6 +95,7 @@ function love.load()
         ['explosion'] = love.audio.newSource('explosion.wav', 'static'),
         ['hurt'] = love.audio.newSource('hurt.wav', 'static'),
         ['score'] = love.audio.newSource('score.wav', 'static'),
+        ['pause'] = love.audio.newSource('Pause_Effect.wav', 'static'),
 
         -- https://freesound.org/people/xsgianni/sounds/388079/
         ['music'] = love.audio.newSource('marios_way.mp3', 'static')
@@ -113,7 +117,8 @@ function love.load()
         ['title'] = function() return TitleScreenState() end,
         ['countdown'] = function() return CountdownState() end,
         ['play'] = function() return PlayState() end,
-        ['score'] = function() return ScoreState() end
+        ['score'] = function() return ScoreState() end,
+        --['pause'] = function() return PauseState() end
     }
     gStateMachine:change('title')
 
