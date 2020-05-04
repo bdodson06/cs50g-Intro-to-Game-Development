@@ -14,6 +14,11 @@ function TitleScreenState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         gStateMachine:change('countdown')
     end
+
+    --transition to Instruction state when "i" is wasPressed
+    if love.keyboard.wasPressed('i') then 
+        gStateMachine:change('instruction')
+    end
 end
 
 function TitleScreenState:render()
@@ -22,5 +27,6 @@ function TitleScreenState:render()
     love.graphics.printf('Fifty Bird', 0, 64, VIRTUAL_WIDTH, 'center')
 
     love.graphics.setFont(mediumFont)
-    love.graphics.printf('Press Enter', 0, 100, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf('To Start Press Enter', 0, 125, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf('For Instructions Press The "I" Key', 0, 175, VIRTUAL_WIDTH, 'center')
 end

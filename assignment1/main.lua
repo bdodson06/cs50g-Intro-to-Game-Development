@@ -38,6 +38,7 @@ require 'states/CountdownState'
 require 'states/PlayState'
 require 'states/ScoreState'
 require 'states/TitleScreenState'
+require 'states/InstructionState'
 --require 'states/PauseState'
 
 require 'Bird'
@@ -118,6 +119,7 @@ function love.load()
         ['countdown'] = function() return CountdownState() end,
         ['play'] = function() return PlayState() end,
         ['score'] = function() return ScoreState() end,
+        ['instruction'] = function() return InstructionState() end
         --['pause'] = function() return PauseState() end
     }
     gStateMachine:change('title')
